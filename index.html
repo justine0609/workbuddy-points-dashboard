@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WorkBuddy 积分消耗可视化大屏</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="stage">
+
+  <header class="hd">
+    <div class="hd-left">
+      <div class="logo"></div>
+      <div>
+        <h1>WorkBuddy 积分消耗可视化大屏</h1>
+        <div class="sub" id="hd-sub">请导入积分消耗数据…</div>
+      </div>
+    </div>
+    <div class="hd-right">
+      <button class="btn" id="btn-import">导入数据</button>
+      <input type="file" id="file-input" accept=".csv,.xlsx,.xls" style="display:none">
+      <button class="btn btn-ghost" id="btn-demo">载入演示数据</button>
+      <div class="hd-meta"><span id="refresh-time">--:--:--</span></div>
+    </div>
+  </header>
+
+  <section class="kpi" id="kpi-row">
+    <div class="kpi-card">
+      <div class="kpi-label">总积分消耗</div>
+      <div class="kpi-value"><span id="k-total">--</span><i>分</i></div>
+      <div class="kpi-sub" id="k-total-sub">统计期内累计</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">消耗笔数</div>
+      <div class="kpi-value"><span id="k-count">--</span><i>笔</i></div>
+      <div class="kpi-sub" id="k-count-sub">非零消耗记录</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">日均消耗</div>
+      <div class="kpi-value"><span id="k-daily">--</span><i>分/天</i></div>
+      <div class="kpi-sub" id="k-daily-sub">按活跃天数计</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">单笔最高</div>
+      <div class="kpi-value"><span id="k-peak">--</span><i>分</i></div>
+      <div class="kpi-sub" id="k-peak-sub">峰值消耗时刻</div>
+    </div>
+  </section>
+
+  <section class="row r1">
+    <div class="panel w-940">
+      <div class="p-hd"><b>每日积分消耗趋势</b><em>按天聚合 · 左轴积分 / 右轴笔数</em></div>
+      <div class="p-bd"><div class="chart" id="c-trend"></div></div>
+    </div>
+    <div class="panel w-460">
+      <div class="p-hd"><b>模型消耗占比</b><em>各模型积分合计</em></div>
+      <div class="p-bd"><div class="chart" id="c-model"></div></div>
+    </div>
+    <div class="panel w-468">
+      <div class="p-hd"><b>使用端分布</b><em>积分 + 笔数双维度</em></div>
+      <div class="p-bd"><div class="chart" id="c-client"></div></div>
+    </div>
+  </section>
+
+  <section class="row r2">
+    <div class="panel w-640">
+      <div class="p-hd"><b>模型消耗排行</b><em>积分 Top 榜</em></div>
+      <div class="p-bd"><div class="chart" id="c-rank"></div></div>
+    </div>
+    <div class="panel w-596">
+      <div class="p-hd"><b>单笔消耗分布</b><em>积分区间分布</em></div>
+      <div class="p-bd"><div class="chart" id="c-bucket"></div></div>
+    </div>
+    <div class="panel w-632">
+      <div class="p-hd"><b>时段消耗热力</b><em>小时 × 消耗均值</em></div>
+      <div class="p-bd"><div class="chart" id="c-hour"></div></div>
+    </div>
+  </section>
+
+  <section class="row r3">
+    <div class="panel w-full">
+      <div class="p-hd"><b>消耗日历热力图</b><em>日期 × 日消耗积分</em></div>
+      <div class="p-bd"><div class="chart" id="c-calendar"></div></div>
+    </div>
+  </section>
+</div>
+
+<div class="err" id="err"><div>
+  <b>数据读取失败</b><br>
+  <span id="err-hint"></span>
+  <div class="err-detail" id="err-detail"></div>
+</div></div>
+
+<script src="lib/echarts.min.js"></script>
+<script src="xlsx_parser.js"></script>
+<script src="demo_data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
